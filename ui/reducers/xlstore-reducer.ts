@@ -41,6 +41,33 @@ export function XLStoreReducer(state: XLStoreState = INITIAL_STATE.xlstoreState,
         error: action.payload,
         activeApp: null,
       }
+    case XLStoreActionCreators.calculateStart.type:
+      return {
+        ...state,
+        calculation: {
+          loading: true,
+          error: null,
+          result: null
+        },
+      }
+    case XLStoreActionCreators.calculateDone.type:
+      return {
+        ...state,
+        calculation: {
+          result: action.payload,
+          error: null,
+          loading: false,
+        },
+      }
+    case XLStoreActionCreators.calculateError.type:
+      return {
+        ...state,
+        calculation: {
+          error: action.payload,
+          loading: false,
+          result: null,
+        },
+      }
     default:
       return state;
   }

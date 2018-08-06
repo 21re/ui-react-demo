@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 import { State } from "../reducers/state";
 import { bindBindableActions } from "../helper/minithunk";
-import { openXLApp, navigateTo, getXLStoreApps, getSmartDataResidentialReport, navigateHome, navigateCalculate, resetSmartData, registerToken, checkToken, querySmartData } from "./demo";
+import { calculate, openXLApp, navigateTo, getXLStoreApps, getSmartDataResidentialReport, navigateHome, navigateCalculate, resetSmartData, registerToken, checkToken, querySmartData } from "./demo";
 import { Address } from "../models/address";
 import { NavigationPage } from "./navigation";
 
@@ -16,6 +16,7 @@ export type BoundActions = {
   navigateCalculate: () => void,
   getXLStoreApps: () => void,
   openXLApp: (id: string) => void,
+  calculate: (id: string, payload: { [K: string]: string }) => void
 }
 
 export function actionBinder(dispatch: Dispatch<State>): BoundActions {
@@ -30,5 +31,6 @@ export function actionBinder(dispatch: Dispatch<State>): BoundActions {
     navigateCalculate,
     getXLStoreApps,
     openXLApp,
+    calculate,
   });
 }
