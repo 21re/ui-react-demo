@@ -132,3 +132,17 @@ export function openXLApp(dispatch: Dispatch<State>): (id: string) => void {
     ) as Promise<any>
   }
 }
+
+export function calculate(dispatch: Dispatch<State>): (id: string, payload: { [k: string]: string }) => void {
+  return (id: string, payload: { [k: string]: string }) => {
+    dispatch(XLStoreActionCreators.calculateStart.create(undefined))
+    return Axios.post(`/v1/xlstore/${id}/calculate`, payload).then(
+      (success: AxiosResponse) => {
+        dispatch(XLStoreActionCreators.calculateDone.create(success.data))
+      },
+      (error: AxiosError) => {
+        dispatch(XLStoreActionCreators.calculateError.create(error))
+      }
+    ) as Promise<any>
+  }
+}

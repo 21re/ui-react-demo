@@ -26,5 +26,12 @@ export interface XLStoreState {
   loading: boolean
   apps: XLStoreApp[]
   activeApp: XLStoreAppDetails | null
+  calculation: CalculationState
   error: AxiosError | null
+}
+
+export interface CalculationState {
+  error: AxiosError | null
+  loading: boolean
+  result: { [k: string]: string } | null
 }

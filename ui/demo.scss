@@ -73,6 +73,13 @@ $theme-colors: (
   }
 }
 
+@include block("calculationResult") {
+  @include modifier("floating") {
+    position: sticky;
+    top: 10px;
+  }
+}
+
 @include block("menuItem") {
   @include element("item") {
     position: relative;
