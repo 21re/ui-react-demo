@@ -6,21 +6,30 @@ import { connect } from "react-redux";
 import { Row, Col, Breadcrumb, BreadcrumbItem, Card, CardHeader, CardBody, Button, Input, FormGroup, Label } from "reactstrap";
 import { NavigationPage } from "../actions/navigation";
 import { XLStoreAppDetails, MetaField, OutputField, InputField } from "../models/calculation";
+import { bind } from "decko";
 
 const mapStateToProps = (state: State) => ({
   token: state.demoState.token,
   loading: state.xlstoreState.loading,
   app: state.xlstoreState.activeApp,
   error: state.xlstoreState.error,
+  calculation: state.xlstoreState.calculation,
 });
 
 const stateProps = returntypeof(mapStateToProps);
 
 type Props = typeof stateProps & BoundActions;
 
-class AppDetailsImpl extends React.Component<Props, {}> {
+export interface AppDetailsState {
+  inputField: { [P: string]: string }
+}
+
+class AppDetailsImpl extends React.Component<Props, AppDetailsState> {
   constructor(props: Props) {
     super(props);
+    this.state = {
+      inputField: {},
+    }
   }
 
   renderAppDetails(app: XLStoreAppDetails) {
@@ -33,9 +42,13 @@ class AppDetailsImpl extends React.Component<Props, {}> {
               {
                 app.inputFields.map(this.renderInputField)
               }
-              <div style={{ position: "sticky", bottom: "10px" }}>
+
+              <div style={{ position: "sticky", bottom: "10px", marginTop: "10px" }}>
                 <FormGroup>
-                  <Button block color="primary">Test calculation</Button>
+                  <Button block
+                    color="primary" {...(this.props.calculation.loading ? { disabled: true } : {})}
+                    onClick={() => this.props.calculate(app.id, this.state.inputField)}
+                  >{this.props.loading ? "Loading..." : "Start calculation"}</Button>
                 </FormGroup>
               </div>
             </CardBody>
@@ -43,48 +56,83 @@ class AppDetailsImpl extends React.Component<Props, {}> {
           <br />
         </Col>
         <Col md="4">
-          <Row>
-            <Col xs="12">
-              <Card>
-                <CardHeader>Output Fields</CardHeader>
-                <CardBody>
-                  {
-                    app.outputFields.map(this.renderOutputField)
-                  }
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-          <br />
-          <Row>
-            <Col xs="12">
-              <Card>
-                <CardHeader>Meta Fields</CardHeader>
-                <CardBody>
-                  {
-                    app.metaFields.map(this.renderMetaField)
-                  }
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
+          <div className="calculationResult--floating">
+            <Row>
+              <Col xs="12">
+                <Card>
+                  <CardHeader>Output Fields</CardHeader>
+                  <CardBody>
+                    {
+                      this.props.calculation.result
+                        ? this.renderCalculationResult(this.props.calculation.result)
+                        : app.outputFields.map(this.renderOutputField)
+                    }
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+            <br />
+            <Row>
+              <Col xs="12">
+                <Card>
+                  <CardHeader>Meta Fields</CardHeader>
+                  <CardBody>
+                    {
+                      app.metaFields.map(this.renderMetaField)
+                    }
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+          </div>
         </Col>
       </Row>
     )
   }
 
-  renderInputField(field: InputField) {
+  renderCalculationResult(result: { [k: string]: string }) {
+    return Object.keys(result)
+      .map((e, i) => {
+        return (
+          <Row key={i}>
+            <Col>
+              <strong>{e}</strong>
+            </Col>
+            <Col>
+              <span>{result[e]}</span>
+            </Col>
+          </Row>
+        )
+      })
+  }
+
+  updateInputFieldState(key: string, value: string) {
+    this.setState({
+      inputField: {
+        ...this.state.inputField,
+        ...{ [key]: value },
+      },
+    })
+  }
+
+  @bind
+  renderInputField(field: InputField, idx: number) {
+    const fieldValue = this.state.inputField[field.name] === undefined ? field.default : this.state.inputField[field.name];
     switch (field.fieldType) {
       case "boolean":
-        return (<Row>
-          <Col xs="12">
-            <FormGroup check>
-              <Label check>
-                <Input type="checkbox" value={field.default} />{' '}{field.name}
-              </Label>
-            </FormGroup>
-          </Col>
-        </Row>);
+        return (
+          <Row key={idx}>
+            <Col xs="12">
+              <Label> {field.name} | {field.fieldType}</Label>
+              <FormGroup check>
+                <Label check>
+                  <div style={{ marginTop: "-1.3rem" }}>
+                    <Input type="checkbox" {...(fieldValue === "TRUE" ? { checked: true } : { checked: false })} onChange={ev => this.updateInputFieldState(field.name, ev.target.checked ? "TRUE" : "FALSE")} />
+                  </div>
+                </Label>
+              </FormGroup>
+            </Col>
+          </Row>);
       case "text":
       case "date":
       case "float":
@@ -94,11 +142,11 @@ class AppDetailsImpl extends React.Component<Props, {}> {
       case "percent":
       default:
         return (
-          <Row>
+          <Row key={idx}>
             <Col xs="12">
               <FormGroup>
-                <Label>{field.name}</Label>
-                <Input value={field.default} />
+                <Label>{field.name} | {field.fieldType}</Label>
+                <Input onChange={ev => this.updateInputFieldState(field.name, ev.target.value)} value={fieldValue} />
               </FormGroup>
             </Col>
           </Row>
@@ -128,9 +176,9 @@ class AppDetailsImpl extends React.Component<Props, {}> {
   }
 
   render() {
-    const { error, app } = this.props;
+    const { error, app, loading } = this.props;
 
-    if (!error && app) {
+    if (!error && !loading && app) {
       return (
         <>
           <Row>
@@ -144,6 +192,8 @@ class AppDetailsImpl extends React.Component<Props, {}> {
           </Row>
           {this.renderAppDetails(app)}
         </>)
+    } else if (loading) {
+      return <h1>Loading...</h1>
     } else {
       return JSON.stringify(error);
     }

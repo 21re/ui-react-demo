@@ -18,6 +18,11 @@ export const INITIAL_STATE: State = {
     loading: false,
     apps: [],
     error: null,
+    calculation: {
+      error: null,
+      loading: false,
+      result: null,
+    },
   },
   navigation: {
     currentPage: null,
