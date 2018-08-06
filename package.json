@@ -63,11 +63,16 @@
     "start": "tsfmt -r && tslint -c tslint.json -p . && webpack-dev-server --inline --history-api-fallback --content-base ./target/web/public/main --mode production",
     "build": "tsfmt -r && webpack --progress --profile --colors --display-error-details --display-cached --optimize-minimize --bail --mode production",
     "build:semifast": "tsfmt -r && webpack --progress --profile --colors --display-error-details --display-cached --bail --mode development",
-    "build_tsc": "tsfmt -r && tslint -c tslint.json --project . && tsc --declaration -p .",
-    "format": "tsfmt -r && scssfmt --recursive ui/**/*.scss",
+    "build_tsc": "tsfmt -r && tslint -c tslint.json --project . && tsc --declaration -p . && cp ui/*.scss lib/",
+    "format": "tsfmt -r && scssfmt --recursive ui/**/*.scss",
     "test": "echo 'no tests here yet'"
   },
   "publishConfig": {
       "registry": "https://repository.control.21re.works/repository/21re-private-npm/"
-  }
+  },
+  "files": [
+    "dist",
+    "lib",
+    "sass"
+  ]
 }
