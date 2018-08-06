@@ -56,7 +56,6 @@
     "webpack-dev-server": "^3.1.1",
     "write-file-webpack-plugin": "4.2.0"
   },
-  "private": true,
   "scripts": {
     "watch": "tsfmt -r && tslint -c tslint.json -p . && webpack --watch --progress --profile --colors --display-error-details --display-cached --mode production",
     "start": "tsfmt -r && tslint -c tslint.json -p . && webpack-dev-server --inline --history-api-fallback --content-base ./target/web/public/main --mode production",
