@@ -66,5 +66,5 @@
   },
   "publishConfig": {
       "registry": "https://repository.control.21re.works/repository/21re-private-npm/"
-  },
+  }
 }
