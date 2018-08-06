@@ -2,6 +2,8 @@
   "name": "@21re/ui-react-demo",
   "version": "0.1.1-SNAPSHOT",
   "description": "21st API Demo",
+  "module": "lib/app.js",
+  "types": "lib/app.d.ts",
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.1.3",
@@ -61,6 +63,7 @@
     "start": "tsfmt -r && tslint -c tslint.json -p . && webpack-dev-server --inline --history-api-fallback --content-base ./target/web/public/main --mode production",
     "build": "tsfmt -r && webpack --progress --profile --colors --display-error-details --display-cached --optimize-minimize --bail --mode production",
     "build:semifast": "tsfmt -r && webpack --progress --profile --colors --display-error-details --display-cached --bail --mode development",
+    "build_tsc": "tsfmt -r && tslint -c tslint.json --project . && tsc --declaration -p .",
     "format": "tsfmt -r && scssfmt --recursive ui/**/*.scss",
     "test": "echo 'no tests here yet'"
   },
