@@ -29,8 +29,8 @@ module.exports = {
 
     entry: {
         'demo': [
-            './ui/demo/app.tsx',
-            './ui/demo/demo.scss',
+            './ui/app.tsx',
+            './ui/demo.scss',
         ],
     },
 
