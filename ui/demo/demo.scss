@@ -1,0 +1,124 @@
+@import "~sass-bem";
+
+$theme-colors: (
+  "primary": #E62565,
+  "tertiary": #2E3B44,
+);
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/code";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/transitions";
+@import "~bootstrap/scss/dropdown";
+@import "~bootstrap/scss/button-group";
+@import "~bootstrap/scss/input-group";
+@import "~bootstrap/scss/custom-forms";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/breadcrumb";
+@import "~bootstrap/scss/pagination";
+@import "~bootstrap/scss/badge";
+@import "~bootstrap/scss/jumbotron";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/progress";
+@import "~bootstrap/scss/media";
+@import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/close";
+@import "~bootstrap/scss/modal";
+@import "~bootstrap/scss/tooltip";
+@import "~bootstrap/scss/popover";
+@import "~bootstrap/scss/carousel";
+@import "~bootstrap/scss/utilities";
+
+.top-navigation {
+  margin-bottom: 35px;
+  .nav-item {
+    .alert {
+      margin-bottom: 0;
+      padding: 0.25rem 0.5rem;
+    }
+  }
+}
+
+.top-navigation__logo {
+  max-width: 100px;
+  background-color: #fff;
+  margin-bottom: -35px;
+  box-shadow: 0 0 3px #767676;
+
+  svg {
+    width: 100px;
+  }
+}
+
+@include block("tokenIndicator") {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  @include modifier("valid") {
+    background-color: theme-color("success");
+  }
+  @include modifier("invalid") {
+    background-color: theme-color("danger");
+  }
+}
+
+@include block("menuItem") {
+  @include element("item") {
+    position: relative;
+    display: flex;
+    height: calc((100vh - 85px) / 3 - 15px);
+    min-height: 120px;
+    overflow: hidden;
+    @include media-breakpoint-up(xs) {
+      margin-bottom: 15px;
+    }
+
+    &:after {
+      display: block;
+      content: " ";
+    }
+
+    &:hover {
+      img {
+        transform: scale(1.1);
+      }
+    }
+    img {
+      max-width: 100%;
+      flex: 1;
+      object-fit: cover;
+      transition: transform .2s ease-out;
+    }
+  }
+  @include element("label") {
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    padding: 20px 15px 10px 15px;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%,rgba(0,0,0,0) 100%);
+    width: 100%;
+
+    span {
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      line-height: 0.9;
+    }
+    p {
+      margin-bottom: 0px;
+      line-height: 1.2;
+    }
+  }
+}
