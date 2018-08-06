@@ -1,4 +1,7 @@
 {
+  "name": "@21re/ui-react-demo",
+  "version": "0.1.1-SNAPSHOT",
+  "description": "21st API Demo",
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.1.3",
