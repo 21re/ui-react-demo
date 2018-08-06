@@ -40,7 +40,7 @@ const routes: Routes<State> = {
     action: (dispatch, params) => {
       dispatch(NavigationActionCreators.navigateTo.create({ name: NavigationPage.Calculate, params: {} }))
       return Promise.resolve(undefined)
-    }
+    },
   },
   "/demo/calculate/:id": {
     name: NavigationPage.AppDetails,
@@ -48,7 +48,7 @@ const routes: Routes<State> = {
       openXLApp(dispatch)(params.id)
       dispatch(NavigationActionCreators.navigateTo.create({ name: NavigationPage.AppDetails, params: { id: params.id } }))
       return Promise.resolve(undefined)
-    }
+    },
   },
 };
 

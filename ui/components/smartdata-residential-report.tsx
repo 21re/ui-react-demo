@@ -12,7 +12,7 @@ import { NavigationPage } from "../actions/navigation";
 const mapStateToProps = (state: State) => ({
   getReportError: state.demoState.getReportError,
   getReportInProgress: state.demoState.getReportInProgress,
-  token: state.demoState.token
+  token: state.demoState.token,
 });
 
 const stateProps = returntypeof(mapStateToProps);
