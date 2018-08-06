@@ -63,5 +63,8 @@
     "build:semifast": "tsfmt -r && webpack --progress --profile --colors --display-error-details --display-cached --bail --mode development",
     "format": "tsfmt -r && scssfmt --recursive ui/**/*.scss",
     "test": "echo 'no tests here yet'"
-  }
+  },
+  "publishConfig": {
+      "registry": "https://repository.control.21re.works/repository/21re-private-npm/"
+  },
 }
