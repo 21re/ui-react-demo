@@ -101,7 +101,7 @@ class AppDetailsImpl extends React.Component<Props, AppDetailsState> {
               <strong>{title}</strong>
             </Col>
             <Col>
-              {typeof value === "string" ? <span>{value}</span> : this.renderError(value.errorCode)}
+              {typeof value === "object" ? this.renderError(value.errorCode) : <span>{value}</span>}
             </Col>
           </Row>
         )
