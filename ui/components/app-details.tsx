@@ -47,8 +47,8 @@ class AppDetailsImpl extends React.Component<Props, AppDetailsState> {
                 <FormGroup>
                   <Button block
                     color="primary" {...(this.props.calculation.loading ? { disabled: true } : {})}
-                    onClick={() => this.props.calculate(app.id, this.state.inputField)}
-                  >{this.props.loading ? "Loading..." : "Start calculation"}</Button>
+                    onClick={() => { (document.getElementById("just-a-jump-beacon") as any).scrollIntoView(); this.props.calculate(app.id, this.state.inputField) }}
+                  >{this.props.loading ? "Loading..." : "Calculate"}</Button>
                 </FormGroup>
               </div>
             </CardBody>
@@ -61,6 +61,7 @@ class AppDetailsImpl extends React.Component<Props, AppDetailsState> {
               <Col xs="12">
                 <Card>
                   <CardHeader>Output Fields</CardHeader>
+                  <a id="just-a-jump-beacon" />
                   <CardBody>
                     {
                       this.props.calculation.result
@@ -203,7 +204,7 @@ class AppDetailsImpl extends React.Component<Props, AppDetailsState> {
     } else if (loading) {
       return <h1>Loading...</h1>
     } else {
-      return JSON.stringify(error);
+      return <Alert color="danger">{error}</Alert>
     }
   }
 }

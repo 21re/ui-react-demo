@@ -44,11 +44,11 @@ export class CalculationMethodListImpl extends React.Component<CalculateProps> {
   }
 
   @bind
-  renderAppItem(app: XLStoreApp) {
-    return <ListGroupItem>
+  renderAppItem(app: XLStoreApp, index: number) {
+    return <ListGroupItem key={index}>
       <ListGroupItemHeading>{app.name}</ListGroupItemHeading>
       {app.id}
-      <Button onClick={() => this.props.openXLApp(app.id)} >details</Button>
+      <div><Button onClick={() => this.props.openXLApp(app.id)} >Details</Button></div>
     </ListGroupItem>
   }
 }
