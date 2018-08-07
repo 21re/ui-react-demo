@@ -32,4 +32,4 @@ export interface CalculationResult {
   [k: string]: CalculationValue
 }
 
-export type CalculationValue = string | number | { errorCode: string }
+export type CalculationValue = string | number | { errorCode: string } | null
