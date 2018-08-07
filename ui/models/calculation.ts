@@ -27,3 +27,9 @@ export interface InputField {
 export interface OutputField {
   name: string
 }
+
+export interface CalculationResult {
+  [k: string]: CalculationValue
+}
+
+export type CalculationValue = string | { errorCode: string }

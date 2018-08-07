@@ -1,7 +1,7 @@
 import { NavigationPage } from "../actions/navigation";
 import { AxiosError } from "axios";
 import { SmartdataResult } from "../models/smartdata";
-import { XLStoreApp, XLStoreAppDetails } from "../models/calculation";
+import { XLStoreApp, XLStoreAppDetails, CalculationResult } from "../models/calculation";
 
 export interface DemoState {
   error: AxiosError | null
@@ -33,5 +33,5 @@ export interface XLStoreState {
 export interface CalculationState {
   error: AxiosError | null
   loading: boolean
-  result: { [k: string]: string } | null
+  result: CalculationResult | null
 }

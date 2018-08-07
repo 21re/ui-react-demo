@@ -3,9 +3,9 @@ import { BoundActions, actionBinder } from "../actions/bindable";
 import { returntypeof } from "../helper/returntypeof";
 import { State } from "../reducers/state";
 import { connect } from "react-redux";
-import { Row, Col, Breadcrumb, BreadcrumbItem, Card, CardHeader, CardBody, Button, Input, FormGroup, Label } from "reactstrap";
+import { Row, Col, Breadcrumb, BreadcrumbItem, Card, CardHeader, CardBody, Button, Input, FormGroup, Label, Alert } from "reactstrap";
 import { NavigationPage } from "../actions/navigation";
-import { XLStoreAppDetails, MetaField, OutputField, InputField } from "../models/calculation";
+import { XLStoreAppDetails, MetaField, OutputField, InputField, CalculationResult } from "../models/calculation";
 import { bind } from "decko";
 
 const mapStateToProps = (state: State) => ({
@@ -90,20 +90,28 @@ class AppDetailsImpl extends React.Component<Props, AppDetailsState> {
     )
   }
 
-  renderCalculationResult(result: { [k: string]: string }) {
+  renderCalculationResult(result: CalculationResult) {
     return Object.keys(result)
       .map((e, i) => {
+        const value = result[e];
+        const title = e;
         return (
           <Row key={i}>
             <Col>
-              <strong>{e}</strong>
+              <strong>{title}</strong>
             </Col>
             <Col>
-              <span>{result[e]}</span>
+              {typeof value === "string" ? <span>{value}</span> : this.renderError(value.errorCode)}
             </Col>
           </Row>
         )
       })
+  }
+
+  renderError(error: string) {
+    return (
+      <Alert color="danger">Error: {error}</Alert>
+    );
   }
 
   updateInputFieldState(key: string, value: string) {
