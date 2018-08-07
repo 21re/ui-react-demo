@@ -1,6 +1,5 @@
 import * as React from "react";
 import { BoundActions, actionBinder } from "../actions/bindable";
-import { returntypeof } from "../helper/returntypeof";
 import { State } from "../reducers/state";
 import { connect } from "react-redux";
 import { Row, Col, Breadcrumb, BreadcrumbItem, Card, CardHeader, CardBody, Button, Input, FormGroup, Label, Alert } from "reactstrap";
@@ -16,9 +15,7 @@ const mapStateToProps = (state: State) => ({
   calculation: state.xlstoreState.calculation,
 });
 
-const stateProps = returntypeof(mapStateToProps);
-
-type Props = typeof stateProps & BoundActions;
+type Props = ReturnType<typeof mapStateToProps> & BoundActions;
 
 export interface AppDetailsState {
   inputField: { [P: string]: string }
@@ -93,9 +90,8 @@ class AppDetailsImpl extends React.Component<Props, AppDetailsState> {
 
   renderCalculationResult(result: CalculationResult) {
     return Object.keys(result)
-      .map((e, i) => {
-        const value = result[e];
-        const title = e;
+      .map((title, i) => {
+        const value = result[title];
         return (
           <Row key={i}>
             <Col>

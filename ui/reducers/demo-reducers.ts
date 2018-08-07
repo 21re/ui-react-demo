@@ -47,11 +47,6 @@ export function DemoReducer(state: DemoState = INITIAL_STATE.demoState, action: 
         getReportInProgress: false,
         getReportError: null,
       }
-    case DemoActionCreators.resetSmartData.type:
-      return {
-        ...state,
-        ...{ smartdata: null },
-      }
     default:
       return { ...state }
   }

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Row, Col, Breadcrumb, BreadcrumbItem, ListGroup, ListGroupItem, ListGroupItemHeading, Button } from "reactstrap";
-import { returntypeof } from "../helper/returntypeof";
 import { State } from "../reducers/state";
 import { BoundActions, actionBinder } from "../actions/bindable";
 import { connect } from "react-redux";
@@ -13,9 +12,7 @@ const mapStateToProps = (state: State) => ({
   apps: state.xlstoreState.apps,
 });
 
-const stateProps = returntypeof(mapStateToProps);
-
-type CalculateProps = typeof stateProps & BoundActions;
+type CalculateProps = ReturnType<typeof mapStateToProps> & BoundActions;
 
 export class CalculationMethodListImpl extends React.Component<CalculateProps> {
   componentWillMount() {

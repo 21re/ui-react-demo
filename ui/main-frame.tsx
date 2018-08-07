@@ -1,6 +1,5 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { returntypeof } from "./helper/returntypeof";
 import { Component } from "react";
 
 import { State } from "./reducers/state";
@@ -28,9 +27,7 @@ const mapStateToProps = (state: State) => ({
   loading: state.demoState.smartdataLoading,
 });
 
-const stateProps = returntypeof(mapStateToProps);
-
-type Props = typeof stateProps & BoundActions;
+type Props = ReturnType<typeof mapStateToProps> & BoundActions;
 
 class MainFrameImpl extends Component<Props, {}> {
   constructor(props: Props) {
@@ -92,6 +89,6 @@ class MainFrameImpl extends Component<Props, {}> {
     )
   }
 
-};
+}
 
 export const MainFrame = connect(mapStateToProps, actionBinder)(MainFrameImpl);

@@ -1,17 +1,16 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { returntypeof } from "../helper/returntypeof";
 import { State } from "../reducers/state";
 import { Col, Row } from "reactstrap";
 import { BoundActions, actionBinder } from "../actions/bindable";
 import { NavigationPage } from "../actions/navigation";
+
 const mapStateToProps = (state: State) => ({
   currentPage: state.navigation.currentPage,
 });
 
-const stateProps = returntypeof(mapStateToProps);
 
-type Props = typeof stateProps & BoundActions;
+type Props = ReturnType<typeof mapStateToProps> & BoundActions;
 
 const DemoMenuImpl: React.StatelessComponent<Props> = (props: Props) => {
   return (
@@ -23,7 +22,7 @@ const DemoMenuImpl: React.StatelessComponent<Props> = (props: Props) => {
               <img src="/assets/smartdata.jpg" />
               <div className="menuItem__label">
                 <span>Smart Data</span>
-                <p>21st comprehensive data for the locatioin and surroundings via data extraction</p>
+                <p>21st comprehensive data for the location and surroundings via data extraction</p>
               </div>
             </div>
           </a>

@@ -19,7 +19,6 @@ import { bind } from 'decko'
 import { Address } from "../models/address"
 import { SmartdataResult, Level0Data, CellData } from "../models/smartdata";
 import { State } from "../reducers/state";
-import { returntypeof } from "../helper/returntypeof";
 import { BoundActions, actionBinder } from "../actions/bindable";
 import { connect } from "react-redux";
 import { NavigationPage } from "../actions/navigation";
@@ -37,9 +36,7 @@ const mapStateToProps = (state: State) => ({
   loading: state.demoState.smartdataLoading,
 });
 
-const stateProps = returntypeof(mapStateToProps);
-
-type SmartDataQueryProps = typeof stateProps & BoundActions;
+type SmartDataQueryProps = ReturnType<typeof mapStateToProps> & BoundActions;
 
 export class SmartDataQueryImpl extends React.Component<SmartDataQueryProps, SmartDataQueryState> {
   constructor(props: SmartDataQueryProps) {

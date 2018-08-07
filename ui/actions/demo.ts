@@ -12,7 +12,7 @@ import { XLStoreActionCreators } from "./xlstore-actions";
 export function checkToken(dispatch: Dispatch<State>): (token: string) => Promise<any> {
   return (token: string) => {
     return Axios.get("/v1/me", { headers: { 'Authorization': `Bearer ${token}` } }).then(
-      (success: AxiosResponse) => {
+      () => {
         registerToken(dispatch)(token)
       },
       (error: AxiosError) => {
@@ -77,26 +77,6 @@ export function getXLStoreApps(dispatch: Dispatch<State>): () => Promise<any> {
         dispatch(XLStoreActionCreators.getXLStoreAppsError.create(error))
       }
     ) as Promise<any>
-  }
-}
-
-export function getXLStoreAppDetails(dispatch: Dispatch<State>): (id: string) => Promise<any> {
-  return (id: string) => {
-    dispatch(XLStoreActionCreators.getXLStoreAppDetailsStart.create(undefined))
-    return Axios.get(`/v1/xlstore/${id}`).then(
-      (success: AxiosResponse) => {
-        dispatch(XLStoreActionCreators.getXLStoreAppDetailsDone.create(success.data))
-      },
-      (error: AxiosError) => {
-        dispatch(XLStoreActionCreators.getXLStoreAppDetailsError.create(error))
-      }
-    ) as Promise<any>
-  }
-}
-
-export function navigateSmartDataQuery(dispatch: Dispatch<State>): () => void {
-  return () => {
-    dispatch(NavigationActionCreators.navigateTo.create({ name: NavigationPage.SmartDataQuery, params: {} }))
   }
 }
 

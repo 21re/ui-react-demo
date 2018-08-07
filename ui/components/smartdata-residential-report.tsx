@@ -1,5 +1,4 @@
 import * as React from "react";
-import { returntypeof } from "../helper/returntypeof";
 import { connect } from "react-redux";
 import { Button, Col, Form, FormGroup, Label, Input, Row, Breadcrumb, BreadcrumbItem, Progress } from "reactstrap";
 import { bind } from 'decko'
@@ -15,8 +14,6 @@ const mapStateToProps = (state: State) => ({
   token: state.demoState.token,
 });
 
-const stateProps = returntypeof(mapStateToProps);
-
 
 export interface SmartDataQueryState {
   address: Partial<Address>
@@ -26,7 +23,7 @@ export interface SmartDataQueryProps {
   onSubmit: (address: Address) => void
 }
 
-type Props = typeof stateProps & BoundActions & SmartDataQueryProps;
+type Props = ReturnType<typeof mapStateToProps> & BoundActions & SmartDataQueryProps;
 
 class SmartDataResidentialReportImpl extends React.Component<Props, SmartDataQueryState> {
   constructor(props: Props) {

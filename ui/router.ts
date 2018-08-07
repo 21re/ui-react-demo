@@ -23,21 +23,21 @@ const routes: Routes<State> = {
   },
   "/demo/smartdata": {
     name: NavigationPage.SmartDataQuery,
-    action: (dispatch, params) => {
+    action: (dispatch) => {
       dispatch(NavigationActionCreators.navigateTo.create({ name: NavigationPage.SmartDataQuery, params: {} }));
       return Promise.resolve(undefined)
     },
   },
   "/demo/smartdata/residential-report": {
     name: NavigationPage.SmartDataResidentialReport,
-    action: (dispatch, params) => {
+    action: (dispatch) => {
       dispatch(NavigationActionCreators.navigateTo.create({ name: NavigationPage.SmartDataResidentialReport, params: {} }));
       return Promise.resolve(undefined)
     },
   },
   "/demo/calculate": {
     name: NavigationPage.Calculate,
-    action: (dispatch, params) => {
+    action: (dispatch) => {
       dispatch(NavigationActionCreators.navigateTo.create({ name: NavigationPage.Calculate, params: {} }))
       return Promise.resolve(undefined)
     },
