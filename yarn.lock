@@ -47,7 +47,7 @@
 
 "@types/numeral@^0.0.25":
   version "0.0.25"
-  resolved "https://repository.control.21re.works/repository/npm/@types/numeral/-/numeral-0.0.25.tgz#b6f55062827a4787fe4ab151cf3412a468e65271"
+  resolved "https://registry.yarnpkg.com/@types/numeral/-/numeral-0.0.25.tgz#b6f55062827a4787fe4ab151cf3412a468e65271"
 
 "@types/react-dom@^16.0.4":
   version "16.0.6"
@@ -5137,7 +5137,7 @@ number-is-nan@^1.0.0:
 
 numeral@^2.0.6:
   version "2.0.6"
-  resolved "https://repository.control.21re.works/repository/npm/numeral/-/numeral-2.0.6.tgz#4ad080936d443c2561aed9f2197efffe25f4e506"
+  resolved "https://registry.yarnpkg.com/numeral/-/numeral-2.0.6.tgz#4ad080936d443c2561aed9f2197efffe25f4e506"
 
 oauth-sign@~0.8.1, oauth-sign@~0.8.2:
   version "0.8.2"
