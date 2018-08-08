@@ -22,6 +22,7 @@ import { State } from "../reducers/state";
 import { BoundActions, actionBinder } from "../actions/bindable";
 import { connect } from "react-redux";
 import { NavigationPage } from "../actions/navigation";
+import * as numeral from "numeral";
 
 export interface SmartDataQueryState {
   address: Partial<Address>
@@ -41,6 +42,27 @@ type SmartDataQueryProps = ReturnType<typeof mapStateToProps> & BoundActions;
 export class SmartDataQueryImpl extends React.Component<SmartDataQueryProps, SmartDataQueryState> {
   constructor(props: SmartDataQueryProps) {
     super(props);
+
+    numeral.register('locale', 'de', {
+      delimiters: {
+        thousands: ' ',
+        decimal: ',',
+      },
+      abbreviations: {
+        thousand: 'k',
+        million: 'm',
+        billion: 'b',
+        trillion: 't',
+      },
+      ordinal: function(number) {
+        return '.';
+      },
+      currency: {
+        symbol: '€',
+      },
+    })
+
+    numeral.locale("de")
 
     this.state = {
       address: {
@@ -97,16 +119,16 @@ export class SmartDataQueryImpl extends React.Component<SmartDataQueryProps, Sma
 
   renderSmartdataResult(result: SmartdataResult) {
     const { address, level0 } = result;
-    const translation: { [P in Level0DataKeys]: string } = {
-      cellId: "",
-      cellSaleML: "Buying price (Machine Learning)",
-      cellSaleCP: "Buying price (Comparables)",
-      cellRentML: "Rent (Machine Learning)",
-      cellRentCP: "Rent (Comparables)",
-      cellMultiplierML: "Multiplier (Machine Learning)",
-      cellMultiplierCP: "Multiplier (Comparables)",
-      cellGrossInitialYieldML: "Gross Initial Yield (Machine Learning)",
-      cellGrossInitialYieldCP: "Gross Initial Yield (Comparables)",
+    const translation: { [P in Level0DataKeys]: [string, (value: number) => string] } = {
+      cellId: ["", value => ""],
+      cellSaleML: ["Buying price (Machine Learning)", value => numeral(value).format("0,0.00 $")],
+      cellSaleCP: ["Buying price (Comparables)", value => numeral(value).format("0,0.00 $")],
+      cellRentML: ["Rent (Machine Learning)", value => numeral(value).format("0,0.00 $")],
+      cellRentCP: ["Rent (Comparables)", value => numeral(value).format("0,0.00 $")],
+      cellMultiplierML: ["Multiplier (Machine Learning)", value => numeral(value).format("0.00")],
+      cellMultiplierCP: ["Multiplier (Comparables)", value => numeral(value).format("0.00")],
+      cellGrossInitialYieldML: ["Gross Initial Yield (Machine Learning)", value => numeral(value).format("0.00 %")],
+      cellGrossInitialYieldCP: ["Gross Initial Yield (Comparables)", value => numeral(value).format("0.00 %")],
     };
 
     return (
@@ -115,6 +137,7 @@ export class SmartDataQueryImpl extends React.Component<SmartDataQueryProps, Sma
           <CardBody>
             <Row>
               <Col>
+                <i>#{level0.cellId}</i><br />
                 <strong>{address.route} {address.streetNumber}</strong><br />
                 <em>{address.postalCode} {address.locality}, {address.country}</em>
               </Col>
@@ -128,14 +151,22 @@ export class SmartDataQueryImpl extends React.Component<SmartDataQueryProps, Sma
         <h3>Results</h3>
         <Container>
           {
-            Object.keys(level0).map((e: Level0DataKeys) => {
-              if (e === "cellId") return null;
+            Object.keys(level0).map((key: Level0DataKeys) => {
+              if (key === "cellId") return null;
+
+              const text = translation[key][0]
 
               return (
                 <>
-                  <strong>{translation[e]}</strong>
+                  <strong>{text}</strong>
                   <Table>
-                    {Object.keys(level0[e]).map((q: CellDataKeys) => <tr><td>{q}</td><td>{level0[e][q]}</td></tr>)}
+                    {Object.keys(level0[key]).map((level0key: CellDataKeys) => {
+                      const format = translation[key][1](level0[key][level0key])
+
+                      return (
+                        <tr><td>{level0key}</td><td>{format}</td></tr>
+                      )
+                    })}
                   </Table>
                 </>
               )
