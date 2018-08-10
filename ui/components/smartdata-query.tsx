@@ -230,7 +230,7 @@ export class SmartDataQueryImpl extends React.Component<SmartDataQueryProps, Sma
           </Row>
         </Form>
         <br />
-        {this.props.error && <Alert color="danger">Error: {this.props.error.response && this.props.error.response.data ? this.props.error.response.data : this.props.error.message}</Alert>}
+        {this.props.error && <Alert color="danger">Error: {this.props.error.response && this.props.error.response.data ? JSON.stringify(this.props.error.response.data) : this.props.error.message}</Alert>}
       </>
     )
   }
