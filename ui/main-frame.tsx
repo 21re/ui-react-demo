@@ -19,6 +19,7 @@ import * as cookie from "cookie";
 import { SmartDataResidentialReport } from "./components/smartdata-residential-report";
 import { CalculationMethodList } from "./components/calculation-method-list";
 import { AppDetails } from "./components/app-details";
+import * as numeral from "numeral";
 
 const mapStateToProps = (state: State) => ({
   currentPage: state.navigation.currentPage,
@@ -35,6 +36,25 @@ class MainFrameImpl extends Component<Props, {}> {
   }
 
   componentDidMount() {
+    numeral.register('locale', 'de', {
+      delimiters: {
+        thousands: ' ',
+        decimal: ',',
+      },
+      abbreviations: {
+        thousand: 'k',
+        million: 'm',
+        billion: 'b',
+        trillion: 't',
+      },
+      ordinal: function(number) {
+        return '.';
+      },
+      currency: {
+        symbol: '€',
+      },
+    })
+
     const cookies = cookie.parse(document.cookie);
     if (cookies['TOKEN']) {
       this.props.registerToken(cookies['TOKEN'])

@@ -45,24 +45,6 @@ export class SmartDataQueryImpl extends React.Component<SmartDataQueryProps, Sma
   constructor(props: SmartDataQueryProps) {
     super(props);
 
-    numeral.register('locale', 'de', {
-      delimiters: {
-        thousands: ' ',
-        decimal: ',',
-      },
-      abbreviations: {
-        thousand: 'k',
-        million: 'm',
-        billion: 'b',
-        trillion: 't',
-      },
-      ordinal: function(number) {
-        return '.';
-      },
-      currency: {
-        symbol: '€',
-      },
-    })
 
     numeral.locale("de")
 
