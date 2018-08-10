@@ -13,7 +13,8 @@ import {
   Row,
   Breadcrumb,
   BreadcrumbItem,
-  Progress
+  Progress,
+  Alert
 } from "reactstrap";
 import { bind } from 'decko'
 import { Address } from "../models/address"
@@ -35,6 +36,7 @@ const mapStateToProps = (state: State) => ({
   token: state.demoState.token,
   smartdata: state.demoState.smartdata,
   loading: state.demoState.smartdataLoading,
+  error: state.demoState.error,
 });
 
 type SmartDataQueryProps = ReturnType<typeof mapStateToProps> & BoundActions;
@@ -227,6 +229,8 @@ export class SmartDataQueryImpl extends React.Component<SmartDataQueryProps, Sma
             </Col>
           </Row>
         </Form>
+        <br />
+        {this.props.error && <Alert color="danger">Error: {this.props.error.response && this.props.error.response.data ? this.props.error.response.data : this.props.error.message}</Alert>}
       </>
     )
   }

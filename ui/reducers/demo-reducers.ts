@@ -17,17 +17,27 @@ export function DemoReducer(state: DemoState = INITIAL_STATE.demoState, action: 
     case DemoActionCreators.querySmartDataStart.type:
       return {
         ...state,
-        ...{ smartdataLoading: true },
+        smartdata: null,
+        smartdataLoading: true,
+        error: null,
       }
     case DemoActionCreators.querySmartDataDone.type:
       return {
         ...state,
-        ...{ smartdata: action.payload, smartdataLoading: false },
+        smartdata: action.payload, smartdataLoading: false,
+      }
+    case DemoActionCreators.querySmartDataError.type:
+      return {
+        ...state,
+        smartdata: null,
+        smartdataLoading: false,
+        error: action.payload,
       }
     case DemoActionCreators.resetSmartData.type:
       return {
         ...state,
-        ...{ smartdata: null, smartdataLoading: false },
+        smartdata: null,
+        smartdataLoading: false,
       }
     case DemoActionCreators.getSmartDataResidentialReportStart.type:
       return {
