@@ -14,6 +14,34 @@ export function DemoReducer(state: DemoState = INITIAL_STATE.demoState, action: 
         ...state,
         token: action.payload,
       };
+    case DemoActionCreators.valuateStart.type:
+      return {
+        ...state,
+        valuationResult: null,
+        valuationInProgress: true,
+        error: null,
+      }
+    case DemoActionCreators.valuateDone.type:
+      return {
+        ...state,
+        valuationResult: action.payload,
+        valuationInProgress: false,
+        error: null,
+      }
+    case DemoActionCreators.valuateError.type:
+      return {
+        ...state,
+        valuationResult: null,
+        valuationInProgress: false,
+        error: action.payload,
+      }
+    case DemoActionCreators.resetValuate.type:
+      return {
+        ...state,
+        valuationResult: null,
+        valuationInProgress: false,
+        error: null,
+      }
     case DemoActionCreators.querySmartDataStart.type:
       return {
         ...state,

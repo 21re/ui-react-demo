@@ -1,6 +1,6 @@
 import { ActionCreator } from "../helper/action-creator";
 
-export type NavigationPage = "DemoIndex" | "SmartDataQuery" | "SmartDataResidentialReport" | "Calculate" | "AppDetails";
+export type NavigationPage = "DemoIndex" | "SmartDataQuery" | "SmartDataResidentialReport" | "Calculate" | "AppDetails" | "Valuate";
 
 export const NavigationPage: { [key in NavigationPage]: NavigationPage } = {
   DemoIndex: "DemoIndex",
@@ -8,6 +8,7 @@ export const NavigationPage: { [key in NavigationPage]: NavigationPage } = {
   SmartDataResidentialReport: "SmartDataResidentialReport",
   Calculate: "Calculate",
   AppDetails: "AppDetails",
+  Valuate: "Valuate",
 };
 
 export const NavigationActionCreators = {

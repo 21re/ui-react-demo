@@ -12,6 +12,8 @@ export const INITIAL_STATE: State = {
     getReportError: null,
     getReportInProgress: false,
     smartdataLoading: false,
+    valuationInProgress: false,
+    valuationResult: null,
   },
   xlstoreState: {
     activeApp: null,

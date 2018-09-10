@@ -49,6 +49,17 @@ const DemoMenuImpl: React.StatelessComponent<Props> = (props: Props) => {
             </div>
           </a>
         </Col>
+        <Col xs="12" sm="6" md="4">
+          <a href="#" onClick={(ev) => { ev.preventDefault(); props.navigateTo(NavigationPage.Valuate) }}>
+            <div className="menuItem__item">
+              <img src="/assets/calculate.jpg" />
+              <div className="menuItem__label">
+                <span>Valuate</span>
+                <p>based on the market data base of the 21st Real Estate GmbH</p>
+              </div>
+            </div>
+          </a>
+        </Col>
       </Row>
     </>
   );

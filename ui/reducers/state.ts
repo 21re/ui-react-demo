@@ -2,6 +2,7 @@ import { NavigationPage } from "../actions/navigation";
 import { AxiosError } from "axios";
 import { SmartdataResult } from "../models/smartdata";
 import { XLStoreApp, XLStoreAppDetails, CalculationResult } from "../models/calculation";
+import { ValuationResult } from "../models/valuate";
 
 export interface DemoState {
   error: AxiosError | null
@@ -10,6 +11,8 @@ export interface DemoState {
   getReportError: AxiosError | null
   getReportInProgress: boolean
   smartdataLoading: boolean
+  valuationResult: ValuationResult | null
+  valuationInProgress: boolean
 }
 
 export interface NavigationState {

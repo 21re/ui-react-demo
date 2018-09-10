@@ -20,6 +20,7 @@ import { SmartDataResidentialReport } from "./components/smartdata-residential-r
 import { CalculationMethodList } from "./components/calculation-method-list";
 import { AppDetails } from "./components/app-details";
 import * as numeral from "numeral";
+import { Valuate } from "./components/valuate";
 
 const mapStateToProps = (state: State) => ({
   currentPage: state.navigation.currentPage,
@@ -67,6 +68,8 @@ class MainFrameImpl extends Component<Props, {}> {
         return <DemoMenu />;
       case NavigationPage.SmartDataQuery:
         return <SmartDataQuery />
+      case NavigationPage.Valuate:
+        return <Valuate />
       case NavigationPage.SmartDataResidentialReport:
         return <SmartDataResidentialReport onSubmit={(address) => this.props.getSmartDataResidentialReport(address)} />
       case NavigationPage.Calculate:

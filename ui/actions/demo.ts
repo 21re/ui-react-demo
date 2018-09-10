@@ -8,6 +8,7 @@ import * as cookie from "cookie";
 import { Address } from "../models/address";
 import * as download from "downloadjs";
 import { XLStoreActionCreators } from "./xlstore-actions";
+import { ValuationRequest } from "../models/valuate";
 
 export function checkToken(dispatch: Dispatch<State>): (token: string) => Promise<any> {
   return (token: string) => {
@@ -39,6 +40,20 @@ export function querySmartData(dispatch: Dispatch<State>): (address: Address) =>
       },
       (error: AxiosError) => {
         dispatch(DemoActionCreators.querySmartDataError.create(error))
+      }
+    ) as Promise<any>
+  }
+}
+
+export function valuate(dispatch: Dispatch<State>): (request: ValuationRequest) => Promise<any> {
+  return (request: ValuationRequest) => {
+    dispatch(DemoActionCreators.valuateStart.create(undefined))
+    return Axios.post("/v1/valuate/residential", request).then(
+      (success: AxiosResponse) => {
+        dispatch(DemoActionCreators.valuateDone.create(success.data))
+      },
+      (error: AxiosError) => {
+        dispatch(DemoActionCreators.valuateError.create(error))
       }
     ) as Promise<any>
   }
@@ -95,6 +110,12 @@ export function navigateCalculate(dispatch: Dispatch<State>): () => void {
 export function resetSmartData(dispatch: Dispatch<State>): () => void {
   return () => {
     dispatch(DemoActionCreators.resetSmartData.create(undefined))
+  }
+}
+
+export function resetValuate(dispatch: Dispatch<State>): () => void {
+  return () => {
+    dispatch(DemoActionCreators.resetValuate.create(undefined))
   }
 }
 

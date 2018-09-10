@@ -28,6 +28,13 @@ const routes: Routes<State> = {
       return Promise.resolve(undefined)
     },
   },
+  "/demo/valuate": {
+    name: NavigationPage.Valuate,
+    action: (dispatch) => {
+      dispatch(NavigationActionCreators.navigateTo.create({ name: NavigationPage.Valuate, params: {} }));
+      return Promise.resolve(undefined)
+    },
+  },
   "/demo/smartdata/residential-report": {
     name: NavigationPage.SmartDataResidentialReport,
     action: (dispatch) => {
