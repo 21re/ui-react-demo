@@ -210,86 +210,100 @@ export class ValuateImpl extends React.Component<ValuateProps, ValuateState> {
           <Row>
             <Col xs="12">
               <FormGroup>
-                <Input type="checkbox" name="refurbished" checked={this.state.userInput.refurbished} id="refurbished" onChange={() => this.setState({ userInput: { ...this.state.userInput, refurbished: !this.state.userInput.refurbished } })} />
-                <Label for="refurbished">This object is refurbished</Label>
+                <Label className="form-check-inline no_indent">
+                  <Input type="checkbox" name="refurbished" checked={this.state.userInput.refurbished} id="refurbished" onChange={() => this.setState({ userInput: { ...this.state.userInput, refurbished: !this.state.userInput.refurbished } })} /> This object is refurbished
+                </Label>
               </FormGroup>
             </Col>
             <Col xs="12">
               <FormGroup>
-                <Input type="checkbox" name="premium" checked={this.state.userInput.premium} id="premium" onChange={() => this.setState({ userInput: { ...this.state.userInput, premium: !this.state.userInput.premium } })} />
-                <Label for="premium">The interior of the object is of premium quality</Label>
+                <Label className="form-check-inline no_indent">
+                  <Input type="checkbox" name="premium" checked={this.state.userInput.premium} id="premium" onChange={() => this.setState({ userInput: { ...this.state.userInput, premium: !this.state.userInput.premium } })} />The interior of the object is of premium quality
+                </Label>
               </FormGroup>
             </Col>
             <Col xs="12">
               <FormGroup>
-                <Input type="checkbox" name="first_occupancy" checked={this.state.userInput.first_occupancy} id="first_occupancy" onChange={() => this.setState({ userInput: { ...this.state.userInput, first_occupancy: !this.state.userInput.first_occupancy } })} />
-                <Label for="first_occupancy">The object will be occupied for the first time</Label>
+                <Label className="form-check-inline no_indent">
+                  <Input type="checkbox" name="first_occupancy" checked={this.state.userInput.first_occupancy} id="first_occupancy" onChange={() => this.setState({ userInput: { ...this.state.userInput, first_occupancy: !this.state.userInput.first_occupancy } })} />The object will be occupied for the first time
+                </Label>
               </FormGroup>
             </Col>
             <Col xs="12">
               <FormGroup>
-                <Input type="checkbox" name="balcony" checked={this.state.userInput.balcony} id="balcony" onChange={() => this.setState({ userInput: { ...this.state.userInput, balcony: !this.state.userInput.balcony } })} />
-                <Label for="balcony">The object has a balcony</Label>
+                <Label className="form-check-inline no_indent">
+                  <Input type="checkbox" name="balcony" checked={this.state.userInput.balcony} id="balcony" onChange={() => this.setState({ userInput: { ...this.state.userInput, balcony: !this.state.userInput.balcony } })} />The object has a balcony
+                </Label>
               </FormGroup>
             </Col>
             <Col xs="12">
               <FormGroup>
-                <Input type="checkbox" name="built_in_kitchen" checked={this.state.userInput.built_in_kitchen} id="built_in_kitchen" onChange={() => this.setState({ userInput: { ...this.state.userInput, built_in_kitchen: !this.state.userInput.built_in_kitchen } })} />
-                <Label for="built_in_kitchen">The object is with a build in kitchen</Label>
+                <Label className="form-check-inline no_indent">
+                  <Input type="checkbox" name="built_in_kitchen" checked={this.state.userInput.built_in_kitchen} id="built_in_kitchen" onChange={() => this.setState({ userInput: { ...this.state.userInput, built_in_kitchen: !this.state.userInput.built_in_kitchen } })} />The object is with a build in kitchen
+                </Label>
               </FormGroup>
             </Col>
             <Col xs="12">
               <FormGroup>
-                <Input type="checkbox" name="garden" checked={this.state.userInput.garden} id="garden" onChange={() => this.setState({ userInput: { ...this.state.userInput, garden: !this.state.userInput.garden } })} />
-                <Label for="garden">The object has a garden</Label>
+                <Label className="form-check-inline no_indent">
+                  <Input type="checkbox" name="garden" checked={this.state.userInput.garden} id="garden" onChange={() => this.setState({ userInput: { ...this.state.userInput, garden: !this.state.userInput.garden } })} />The object has a garden
+                </Label>
               </FormGroup>
             </Col>
             <Col xs="12">
               <FormGroup>
-                <Input type="checkbox" name="basement" checked={this.state.userInput.basement} id="basement" onChange={() => this.setState({ userInput: { ...this.state.userInput, basement: !this.state.userInput.basement } })} />
-                <Label for="basement">The object has a basement</Label>
+                <Label className="form-check-inline no_indent">
+                  <Input type="checkbox" name="basement" checked={this.state.userInput.basement} id="basement" onChange={() => this.setState({ userInput: { ...this.state.userInput, basement: !this.state.userInput.basement } })} />The object has a basement
+                </Label>
               </FormGroup>
             </Col>
             <Col xs="12">
               <FormGroup>
-                <Input type="checkbox" name="elevator" checked={this.state.userInput.elevator} id="elevator" onChange={() => this.setState({ userInput: { ...this.state.userInput, elevator: !this.state.userInput.elevator } })} />
-                <Label for="elevator">The object has an elevator</Label>
+                <Label className="form-check-inline no_indent">
+                  <Input type="checkbox" name="elevator" checked={this.state.userInput.elevator} id="elevator" onChange={() => this.setState({ userInput: { ...this.state.userInput, elevator: !this.state.userInput.elevator } })} />The object has an elevator
+                </Label>
               </FormGroup>
             </Col>
             <Col xs="12">
               <FormGroup>
-                <Input type="checkbox" name="heating_in_floor" checked={this.state.userInput.heating_in_floor} id="heating_in_floor" onChange={() => this.setState({ userInput: { ...this.state.userInput, heating_in_floor: !this.state.userInput.heating_in_floor } })} />
-                <Label for="heating_in_floor">The object has underfloor heating</Label>
+                <Label className="form-check-inline no_indent">
+                  <Input type="checkbox" name="heating_in_floor" checked={this.state.userInput.heating_in_floor} id="heating_in_floor" onChange={() => this.setState({ userInput: { ...this.state.userInput, heating_in_floor: !this.state.userInput.heating_in_floor } })} />The object has underfloor heating
+                </Label>
               </FormGroup>
             </Col>
             <Col xs="12">
               <FormGroup>
-                <Input type="checkbox" name="parquet_floor" checked={this.state.userInput.parquet_floor} id="parquet_floor" onChange={() => this.setState({ userInput: { ...this.state.userInput, parquet_floor: !this.state.userInput.parquet_floor } })} />
-                <Label for="parquet_floor">The object has parquet floor</Label>
+                <Label className="form-check-inline no_indent">
+                  <Input type="checkbox" name="parquet_floor" checked={this.state.userInput.parquet_floor} id="parquet_floor" onChange={() => this.setState({ userInput: { ...this.state.userInput, parquet_floor: !this.state.userInput.parquet_floor } })} />The object has parquet floor
+                </Label>
               </FormGroup>
             </Col>
             <Col xs="12">
               <FormGroup>
-                <Input type="checkbox" name="floor_attic" checked={this.state.userInput.floor_attic} id="floor_attic" onChange={() => this.setState({ userInput: { ...this.state.userInput, floor_attic: !this.state.userInput.floor_attic } })} />
-                <Label for="floor_attic">The object is located in the top floor</Label>
+                <Label className="form-check-inline no_indent">
+                  <Input type="checkbox" name="floor_attic" checked={this.state.userInput.floor_attic} id="floor_attic" onChange={() => this.setState({ userInput: { ...this.state.userInput, floor_attic: !this.state.userInput.floor_attic } })} />The object is located in the top floor
+                </Label>
               </FormGroup>
             </Col>
             <Col xs="12">
               <FormGroup>
-                <Input type="checkbox" name="floor_ground" checked={this.state.userInput.floor_ground} id="floor_ground" onChange={() => this.setState({ userInput: { ...this.state.userInput, floor_ground: !this.state.userInput.floor_ground } })} />
-                <Label for="floor_ground">The object is lcoated in the ground floor</Label>
+                <Label className="form-check-inline no_indent">
+                  <Input type="checkbox" name="floor_ground" checked={this.state.userInput.floor_ground} id="floor_ground" onChange={() => this.setState({ userInput: { ...this.state.userInput, floor_ground: !this.state.userInput.floor_ground } })} />The object is lcoated in the ground floor
+                </Label>
               </FormGroup>
             </Col>
             <Col xs="12">
               <FormGroup>
-                <Input type="checkbox" name="object_is_house" checked={this.state.userInput.object_is_house} id="object_is_house" onChange={() => this.setState({ userInput: { ...this.state.userInput, object_is_house: !this.state.userInput.object_is_house } })} />
-                <Label for="object_is_house">The object is a house</Label>
+                <Label className="form-check-inline no_indent">
+                  <Input type="checkbox" name="object_is_house" checked={this.state.userInput.object_is_house} id="object_is_house" onChange={() => this.setState({ userInput: { ...this.state.userInput, object_is_house: !this.state.userInput.object_is_house } })} />The object is a house
+                </Label>
               </FormGroup>
             </Col>
             <Col xs="12">
               <FormGroup>
-                <Input type="checkbox" name="in_need_of_renovation" checked={this.state.userInput.in_need_of_renovation} id="in_need_of_renovation" onChange={() => this.setState({ userInput: { ...this.state.userInput, in_need_of_renovation: !this.state.userInput.in_need_of_renovation } })} />
-                <Label for="in_need_of_renovation">The object is in need of renovation</Label>
+                <Label className="form-check-inline no_indent">
+                  <Input type="checkbox" name="in_need_of_renovation" checked={this.state.userInput.in_need_of_renovation} id="in_need_of_renovation" onChange={() => this.setState({ userInput: { ...this.state.userInput, in_need_of_renovation: !this.state.userInput.in_need_of_renovation } })} />The object is in need of renovation
+                </Label>
               </FormGroup>
             </Col>
             <Col xs="12">
