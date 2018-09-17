@@ -3,6 +3,7 @@
 $theme-colors: (
   "primary": #E62565,
   "tertiary": #2E3B44,
+  "default": #e6e6e6,
 );
 
 @import "~bootstrap/scss/functions";
@@ -129,3 +130,17 @@ $theme-colors: (
     }
   }
 }
+
+.valuate_toggle_button {
+  text-align: left;
+  white-space: initial;
+  display: flex;
+  .badge {
+    font-size: 18px;
+    font-weight: 800;
+    margin-right: 10px;
+    display: inline-block;
+    top: 0;
+  }
+}
+

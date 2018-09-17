@@ -13,7 +13,8 @@ import {
   Alert,
   Card,
   CardBody,
-  Container
+  Container,
+  Badge
 } from "reactstrap";
 import { bind } from 'decko'
 import { Address } from "../models/address"
@@ -232,12 +233,16 @@ export class ValuateImpl extends React.Component<ValuateProps, ValuateState> {
           <h3>Input</h3>
           <Row>
             {checkboxes.map(e =>
-              <Col xs="12" sm="12" md="6">
+              <Col xs="12" sm="12" lg="6">
                 <FormGroup>
-                  <Label className="form-check-inline no_indent">
-                    <Input type="checkbox" name="premium" checked={e.value} id="premium" onChange={() => this.setState({ userInput: { ...this.state.userInput, [e.name]: !this.state.userInput[e.name] } })} />
-                    {e.description}
-                  </Label>
+                  <button className="btn btn-outline-default btn-block valuate_toggle_button text-dark" type="button" onClick={() => this.setState({ userInput: { ...this.state.userInput, [e.name]: !this.state.userInput[e.name] } })}>
+                    <div>
+                      {e.value ? <Badge color="success">&#x2713;</Badge> : <Badge color="light">&#x2a2f;</Badge>}
+                    </div>
+                    <div>
+                      {e.description}
+                    </div>
+                  </button>
                 </FormGroup>
               </Col>
             )}
