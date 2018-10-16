@@ -1,7 +1,7 @@
 
 import { ActionCreator } from "../helper/action-creator";
 import { AxiosError } from "axios";
-import { XLStoreApp, XLStoreAppDetails, CalculationResult } from "../models/calculation"
+import { XLStoreApp, XLStoreAppDetails, XLCalculationResult } from "../models/xlstore"
 
 export const XLStoreActionCreators = {
   getXLStoreAppsStart: new ActionCreator<'GET_XLSTORE_APPS_START', undefined>('GET_XLSTORE_APPS_START'),
@@ -13,7 +13,7 @@ export const XLStoreActionCreators = {
   getXLStoreAppDetailsError: new ActionCreator<'GET_XLSTORE_APP_DETAILSERROR', AxiosError>('GET_XLSTORE_APP_DETAILSERROR'),
 
   calculateStart: new ActionCreator<'CALCULATE_START', undefined>('CALCULATE_START'),
-  calculateDone: new ActionCreator<'CALCULATE_DONE', CalculationResult>('CALCULATE_DONE'),
+  calculateDone: new ActionCreator<'CALCULATE_DONE', XLCalculationResult>('CALCULATE_DONE'),
   calculateError: new ActionCreator<'CALCULATE_ERROR', AxiosError>('CALCULATE_ERROR'),
 };
 

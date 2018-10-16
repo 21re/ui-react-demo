@@ -3,7 +3,7 @@ import { Row, Col, Breadcrumb, BreadcrumbItem, ListGroup, ListGroupItem, ListGro
 import { State } from "../reducers/state";
 import { BoundActions, actionBinder } from "../actions/bindable";
 import { connect } from "react-redux";
-import { XLStoreApp } from "../models/calculation";
+import { XLStoreApp } from "../models/xlstore";
 import { bind } from "decko";
 
 
@@ -14,7 +14,7 @@ const mapStateToProps = (state: State) => ({
 
 type CalculateProps = ReturnType<typeof mapStateToProps> & BoundActions;
 
-export class CalculationMethodListImpl extends React.Component<CalculateProps> {
+export class XLStoreAppListImpl extends React.Component<CalculateProps> {
   componentWillMount() {
     this.props.getXLStoreApps();
   }
@@ -45,9 +45,9 @@ export class CalculationMethodListImpl extends React.Component<CalculateProps> {
     return <ListGroupItem key={index}>
       <ListGroupItemHeading>{app.name}</ListGroupItemHeading>
       {app.id}
-      <div><Button onClick={() => this.props.openXLApp(app.id)} >Details</Button></div>
+      <div><Button onClick={() => this.props.openXLStoreApp(app.id)} >Details</Button></div>
     </ListGroupItem>
   }
 }
 
-export const CalculationMethodList = connect(mapStateToProps, actionBinder)(CalculationMethodListImpl)
+export const XLStoreAppList = connect(mapStateToProps, actionBinder)(XLStoreAppListImpl)

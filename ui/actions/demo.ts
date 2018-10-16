@@ -9,6 +9,7 @@ import { Address } from "../models/address";
 import * as download from "downloadjs";
 import { XLStoreActionCreators } from "./xlstore-actions";
 import { ValuationRequest } from "../models/valuate";
+import { XLCalculationRequest } from "../models/xlstore";
 
 export function checkToken(dispatch: Dispatch<State>): (token: string) => Promise<any> {
   return (token: string) => {
@@ -119,7 +120,7 @@ export function resetValuate(dispatch: Dispatch<State>): () => void {
   }
 }
 
-export function openXLApp(dispatch: Dispatch<State>): (id: string) => void {
+export function openXLStoreApp(dispatch: Dispatch<State>): (id: string) => void {
   return (id: string) => {
     dispatch(XLStoreActionCreators.getXLStoreAppDetailsStart.create(undefined))
     dispatch(NavigationActionCreators.navigateTo.create({ name: NavigationPage.AppDetails, params: { id: id } }))
@@ -134,10 +135,10 @@ export function openXLApp(dispatch: Dispatch<State>): (id: string) => void {
   }
 }
 
-export function calculate(dispatch: Dispatch<State>): (id: string, payload: { [k: string]: string }) => void {
-  return (id: string, payload: { [k: string]: string }) => {
+export function calculateXLStoreApp(dispatch: Dispatch<State>): (id: string, request: XLCalculationRequest) => void {
+  return (id: string, request: XLCalculationRequest) => {
     dispatch(XLStoreActionCreators.calculateStart.create(undefined))
-    return Axios.post(`/v1/xlstore/${id}/calculate`, payload).then(
+    return Axios.post(`/v1/xlstore/${id}/calculate`, request).then(
       (success: AxiosResponse) => {
         dispatch(XLStoreActionCreators.calculateDone.create(success.data))
       },

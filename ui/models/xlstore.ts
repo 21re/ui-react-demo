@@ -1,3 +1,5 @@
+import { Address } from "./address";
+
 export interface XLStoreApp {
   id: string,
   name: string,
@@ -11,6 +13,7 @@ export interface XLStoreAppDetails {
   metaFields: MetaField[]
   inputFields: InputField[]
   outputFields: OutputField[]
+  requirements: string[]
 }
 
 export interface MetaField {
@@ -28,8 +31,15 @@ export interface OutputField {
   name: string
 }
 
-export interface CalculationResult {
-  [k: string]: CalculationValue
+export interface XLCalculationRequest {
+  user: { [k: string]: string | number | boolean },
+  address?: Address
 }
 
-export type CalculationValue = string | number | { errorCode: string } | null
+export interface XLCalculationResult {
+  appId: string
+  appVersion: number
+  result: { [k: string]: CalculationValue }
+}
+
+export type CalculationValue = string | number | { errorCode: string }

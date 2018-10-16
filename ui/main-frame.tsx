@@ -17,8 +17,8 @@ import DemoMenu from "./components/demo-menu";
 import { SmartDataQuery } from "./components/smartdata-query";
 import * as cookie from "cookie";
 import { SmartDataResidentialReport } from "./components/smartdata-residential-report";
-import { CalculationMethodList } from "./components/calculation-method-list";
-import { AppDetails } from "./components/app-details";
+import { XLStoreAppList } from "./components/xlstore-app-list";
+import { XLStoreAppDetailsView } from "./components/xlstore-app-details-view";
 import * as numeral from "numeral";
 import { Valuate } from "./components/valuate";
 
@@ -73,9 +73,9 @@ class MainFrameImpl extends Component<Props, {}> {
       case NavigationPage.SmartDataResidentialReport:
         return <SmartDataResidentialReport onSubmit={(address) => this.props.getSmartDataResidentialReport(address)} />
       case NavigationPage.Calculate:
-        return <CalculationMethodList />
+        return <XLStoreAppList />
       case NavigationPage.AppDetails:
-        return <AppDetails />
+        return <XLStoreAppDetailsView />
       default:
         return "not routed";
     }
