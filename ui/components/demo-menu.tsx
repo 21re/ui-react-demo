@@ -66,7 +66,7 @@ const DemoMenuImpl: React.StatelessComponent<Props> = (props: Props) => {
               <img src="/assets/rentindex.jpg" />
               <div className="menuItem__label">
                 <span>Rentindex Calculation</span>
-                <p>Lorem ipsum dolor sit amet bli bla blub dolor sit amet lorem ipsum</p>
+                <p>Calculate the rentindex for every address in Germany.</p>
               </div>
             </div>
           </a>
