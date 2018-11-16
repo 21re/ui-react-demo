@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Row, Col, Breadcrumb, BreadcrumbItem, ListGroup, ListGroupItem, ListGroupItemHeading, Button } from "reactstrap";
+import { Row, Col, Breadcrumb, BreadcrumbItem, ListGroup, ListGroupItem, ListGroupItemHeading, Button, Alert } from "reactstrap";
 import { State } from "../reducers/state";
 import { BoundActions, actionBinder } from "../actions/bindable";
 import { connect } from "react-redux";
@@ -36,7 +36,7 @@ export class XLStoreAppListImpl extends React.Component<CalculateProps> {
 
   renderInner() {
     return (<ListGroup>
-      {this.props.apps.map(this.renderAppItem)}
+      {this.props.apps.length > 0 ? this.props.apps.map(this.renderAppItem) : <Alert color="warning">There are currently no calculations available for your company.</Alert>}
     </ListGroup>);
   }
 
