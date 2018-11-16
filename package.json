@@ -66,7 +66,7 @@
     "build": "tsfmt -r && webpack --progress --profile --colors --display-error-details --display-cached --optimize-minimize --bail --mode production",
     "build:semifast": "tsfmt -r && webpack --progress --profile --colors --display-error-details --display-cached --bail --mode development",
     "build_tsc": "tsfmt -r && tslint -c tslint.json --project . && tsc --declaration -p . && cp ui/*.scss lib/",
-    "format": "tsfmt -r && scssfmt --recursive ui/**/*.scss",
+    "format": "tsfmt -r && tslint -c tslint.json --project . && scssfmt --recursive ui/**/*.scss",
     "test": "echo 'no tests here yet'",
     "watch_tsc": "tsc --declaration -p . --watch"
   },

@@ -21,6 +21,7 @@ import { XLStoreAppList } from "./components/xlstore-app-list";
 import { XLStoreAppDetailsView } from "./components/xlstore-app-details-view";
 import * as numeral from "numeral";
 import { Valuate } from "./components/valuate";
+import { RentIndex } from "./components/rent-index-query";
 
 const mapStateToProps = (state: State) => ({
   currentPage: state.navigation.currentPage,
@@ -76,6 +77,8 @@ class MainFrameImpl extends Component<Props, {}> {
         return <XLStoreAppList />
       case NavigationPage.AppDetails:
         return <XLStoreAppDetailsView />
+      case NavigationPage.RentIndex:
+        return <RentIndex />
       default:
         return "not routed";
     }

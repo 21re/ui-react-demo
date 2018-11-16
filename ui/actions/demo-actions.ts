@@ -2,6 +2,7 @@ import { ActionCreator } from "../helper/action-creator";
 import { AxiosError } from "axios";
 import { SmartdataResult } from "../models/smartdata";
 import { ValuationResult } from "../models/valuate";
+import { RentIndexList, RentIndex, RentResult } from "../models/rentindex";
 
 export const DemoActionCreators = {
   setError: new ActionCreator<'SET_ERROR', AxiosError>('SET_ERROR'),
@@ -21,6 +22,19 @@ export const DemoActionCreators = {
   getSmartDataResidentialReportStart: new ActionCreator<'GET_SMARTDATA_RESIDENTIAL_REPORT_START', undefined>('GET_SMARTDATA_RESIDENTIAL_REPORT_START'),
   getSmartDataResidentialReportDone: new ActionCreator<'GET_SMARTDATA_RESIDENTIAL_REPORT_DONE', undefined>('GET_SMARTDATA_RESIDENTIAL_REPORT_DONE'),
   getSmartDataResidentialReportError: new ActionCreator<'GET_SMARTDATA_RESIDENTIAL_REPORT_ERROR', AxiosError>('GET_SMARTDATA_RESIDENTIAL_REPORT_ERROR'),
+
+  getRentIndexListStart: new ActionCreator<'GET_RENTINDEX_LIST_START', undefined>('GET_RENTINDEX_LIST_START'),
+  getRentIndexListDone: new ActionCreator<'GET_RENTINDEX_LIST_DONE', RentIndexList>('GET_RENTINDEX_LIST_DONE'),
+  getRentIndexListError: new ActionCreator<'GET_RENTINDEX_LIST_ERROR', AxiosError>('GET_RENTINDEX_LIST_ERROR'),
+
+
+  getRentIndexStart: new ActionCreator<'GET_RENTINDEX_START', undefined>('GET_RENTINDEX_START'),
+  getRentIndexDone: new ActionCreator<'GET_RENTINDEX_DONE', RentIndex>('GET_RENTINDEX_DONE'),
+  getRentIndexError: new ActionCreator<'GET_RENTINDEX_ERROR', AxiosError>('GET_RENTINDEX_ERROR'),
+
+  getRentCalculateStart: new ActionCreator<'GET_RENTCALCULATE_START', undefined>('GET_RENTCALCULATE_START'),
+  getRentCalculateDone: new ActionCreator<'GET_RENTCALCULATE_DONE', RentResult>('GET_RENTCALCULATE_DONE'),
+  getRentCalculateError: new ActionCreator<'GET_RENTCALCULATE_ERROR', AxiosError>('GET_RENTCALCULATE_ERROR'),
 };
 
 export type DemoAction = typeof DemoActionCreators[keyof typeof DemoActionCreators];

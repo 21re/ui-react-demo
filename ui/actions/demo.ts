@@ -10,6 +10,7 @@ import * as download from "downloadjs";
 import { XLStoreActionCreators } from "./xlstore-actions";
 import { ValuationRequest } from "../models/valuate";
 import { XLCalculationRequest } from "../models/xlstore";
+import { QuestionCatalogRequest } from "../models/rentindex";
 
 export function checkToken(dispatch: Dispatch<State>): (token: string) => Promise<any> {
   return (token: string) => {
@@ -41,6 +42,49 @@ export function querySmartData(dispatch: Dispatch<State>): (address: Address) =>
       },
       (error: AxiosError) => {
         dispatch(DemoActionCreators.querySmartDataError.create(error))
+      }
+    ) as Promise<any>
+  }
+}
+export function getRentIndexList(dispatch: Dispatch<State>): () => void {
+  return () => {
+    dispatch(DemoActionCreators.getRentIndexListStart.create(undefined))
+    return Axios.get("/v2/rentindex/list").then(
+      (success: AxiosResponse) => {
+        dispatch(DemoActionCreators.getRentIndexListDone.create(success.data))
+      },
+      (error: AxiosError) => {
+        dispatch(DemoActionCreators.getRentIndexListError.create(error))
+      }
+
+    ) as Promise<any>
+  }
+}
+
+export function getRentIndex(dispatch: Dispatch<State>): (city: string, year: number) => Promise<any> {
+  return (city: string, year: number) => {
+    dispatch(DemoActionCreators.getRentIndexStart.create(undefined))
+    return Axios.get(`/v2/rentindex/${city}/${year}`).then(
+      (success: AxiosResponse) => {
+        dispatch(DemoActionCreators.getRentIndexDone.create(success.data))
+      },
+      (error: AxiosError) => {
+        dispatch(DemoActionCreators.getRentIndexError.create(error))
+      }
+
+    ) as Promise<any>
+  }
+}
+
+export function calculateRentIndex(dispatch: Dispatch<State>): (city: string, year: number, request: QuestionCatalogRequest) => Promise<any> {
+  return (city: string, year: number, request: QuestionCatalogRequest) => {
+    dispatch(DemoActionCreators.getRentCalculateStart.create(undefined))
+    return Axios.post(`/v2/rentindex/${city}/${year}`, request).then(
+      (success: AxiosResponse) => {
+        dispatch(DemoActionCreators.getRentCalculateDone.create(success.data))
+      },
+      (error: AxiosError) => {
+        dispatch(DemoActionCreators.getRentCalculateError.create(error))
       }
     ) as Promise<any>
   }
