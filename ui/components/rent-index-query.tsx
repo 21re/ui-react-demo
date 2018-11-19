@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Form, Col, FormGroup, Label, Input, Row, Button, Card, CardBody, CardTitle, ListGroupItem, ListGroup, Alert } from "reactstrap";
+import { Form, Col, FormGroup, Label, Input, Row, Button, Card, CardBody, CardTitle, ListGroupItem, ListGroup, Alert, Table } from "reactstrap";
 import { State } from "../reducers/state";
 import { BoundActions, actionBinder } from "../actions/bindable";
 import { connect } from "react-redux";
-import { RentIndexListItem, QuestionCatalog, Question, QuestionCatalogRequest, Address } from "../models/rentindex";
+import { RentIndexListItem, QuestionCatalog, Question, QuestionCatalogRequest, Address, RentResult } from "../models/rentindex";
 import { bind } from "decko";
 import { isBoolean, isString } from "util";
 
@@ -44,6 +44,11 @@ export class RentIndexImpl extends React.Component<RentIndexProps, RentIndexStat
         },
       },
     }
+  }
+
+
+  componentWillMount() {
+    this.props.getRentIndexList()
   }
 
   @bind
@@ -155,7 +160,7 @@ export class RentIndexImpl extends React.Component<RentIndexProps, RentIndexStat
   @bind
   updateAddress(field: keyof Address): (event: React.ChangeEvent<HTMLInputElement>) => void {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
-      const o = {
+      this.setState({
         rentIndexRequest: {
           ...this.state.rentIndexRequest,
           ...{
@@ -165,8 +170,7 @@ export class RentIndexImpl extends React.Component<RentIndexProps, RentIndexStat
             },
           },
         },
-      }
-      this.setState(o)
+      })
     }
   }
 
@@ -174,6 +178,35 @@ export class RentIndexImpl extends React.Component<RentIndexProps, RentIndexStat
   submit(ev: any) {
     ev.preventDefault();
     this.state.city && this.props.calculateRentIndex(this.state.city.name, this.state.selectedYear as number, this.state.rentIndexRequest)
+  }
+
+  renderResult(results: RentResult[] | null) {
+    const result = results && results[0];
+    if (!result || result.rentIndex == undefined) return null;
+
+    return (
+      <Row>
+        <Col xs="12">
+          <h3>Result</h3>
+          <Table>
+            <thead>
+              <tr>
+                <th>Min</th>
+                <th>Avg</th>
+                <th>Max</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{result.rentIndex.min}</td>
+                <td>{result.rentIndex.avg}</td>
+                <td>{result.rentIndex.max}</td>
+              </tr>
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
+    )
   }
 
   render() {
@@ -219,64 +252,65 @@ export class RentIndexImpl extends React.Component<RentIndexProps, RentIndexStat
           </Col>
         </Row>
         <br />
-        <Row>
-          <Col xs="4">
-            <FormGroup>
-              <Label>Zip Code</Label>
-              <Input type="number" name="zip" required={true} value={this.state.rentIndexRequest.address.postalCode} id="zip" onChange={this.updateAddress("postalCode")} />
-            </FormGroup>
-          </Col>
-          <Col xs="8">
-            <FormGroup>
-              <Label>City</Label>
-              <Input name="city" id="city" required={true} value={this.state.rentIndexRequest.address.locality} onChange={this.updateAddress("locality")} />
-            </FormGroup>
-          </Col>
-          <Col xs="8">
-            <FormGroup>
-              <Label>Street</Label>
-              <Input name="street" id="street" required={true} value={this.state.rentIndexRequest.address.route} onChange={this.updateAddress("route")} />
-            </FormGroup>
-          </Col>
-          <Col xs="4">
-            <FormGroup>
-              <Label>Number</Label>
-              <Input name="streetnumber" id="streetnumber" required={true} value={this.state.rentIndexRequest.address.streetNumber} onChange={this.updateAddress("streetNumber")} />
-            </FormGroup>
-          </Col>
-          <Col xs="12">
-            <FormGroup>
-              <Label>Country</Label>
-              <Input type="select" name="country" id="country" required={true} value={this.state.rentIndexRequest.address.country} onChange={this.updateAddress("country")}>
-                <option value="DE">Germany</option>
-              </Input>
-            </FormGroup>
-          </Col>
-          <Col xs="12">
-            <FormGroup>
-              <Label>Area</Label>
-              <Input name="area" id="area" type="number" required={true} value={this.state.rentIndexRequest.areas[0] | 0} onChange={this.updateArea} />
-            </FormGroup>
-          </Col>
-        </Row>
+        {this.state.city && this.state.selectedYear && this.props.rentIndex && <div>
+          <Row>
+            <Col xs="4">
+              <FormGroup>
+                <Label>Zip Code</Label>
+                <Input type="number" name="zip" required={true} value={this.state.rentIndexRequest.address.postalCode} id="zip" onChange={this.updateAddress("postalCode")} />
+              </FormGroup>
+            </Col>
+            <Col xs="8">
+              <FormGroup>
+                <Label>City</Label>
+                <Input name="city" id="city" required={true} value={this.state.rentIndexRequest.address.locality} onChange={this.updateAddress("locality")} />
+              </FormGroup>
+            </Col>
+            <Col xs="8">
+              <FormGroup>
+                <Label>Street</Label>
+                <Input name="street" id="street" required={true} value={this.state.rentIndexRequest.address.route} onChange={this.updateAddress("route")} />
+              </FormGroup>
+            </Col>
+            <Col xs="4">
+              <FormGroup>
+                <Label>Number</Label>
+                <Input name="streetnumber" id="streetnumber" required={true} value={this.state.rentIndexRequest.address.streetNumber} onChange={this.updateAddress("streetNumber")} />
+              </FormGroup>
+            </Col>
+            <Col xs="12">
+              <FormGroup>
+                <Label>Country</Label>
+                <Input type="select" name="country" id="country" required={true} value={this.state.rentIndexRequest.address.country} onChange={this.updateAddress("country")}>
+                  <option value="DE">Germany</option>
+                </Input>
+              </FormGroup>
+            </Col>
+            <Col xs="12">
+              <FormGroup>
+                <Label>Area</Label>
+                <Input name="area" id="area" type="number" required={true} value={this.state.rentIndexRequest.areas[0] | 0} onChange={this.updateArea} />
+              </FormGroup>
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <Col xs="12"><h3>Question Catalog</h3></Col>
+            {
+              this.props.rentIndex && this.props.rentIndex.questionCatalogs.map(this.renderQuestionCatalog)
+              || <Col xs="12"><Alert color="warning">Select city and year first.</Alert></Col>
+            }
+            <br />
+            <Col xs="12">
+              {this.renderResult(this.props.result)}
+            </Col>
+            <Col xs="12">
+              <Button type="submit" onClick={this.submit}>Submit</Button>
+            </Col>
+          </Row>
+        </div>
+        }
         <br />
-        <Row>
-          <Col xs="12"><h3>Question Catalog</h3></Col>
-          {
-            this.props.rentIndex && this.props.rentIndex.questionCatalogs.map(this.renderQuestionCatalog)
-            || <Col xs="12"><Alert color="warning">Select city and year first.</Alert></Col>
-          }
-          <Col xs="12">
-            <Button type="submit" onClick={this.submit}>Submit</Button>
-          </Col>
-        </Row>
-        <br />
-        {this.props.result && <Row>
-          <Col xs="12">
-            <h3>Result</h3>
-            <Alert>{JSON.stringify(this.props.result)}</Alert>
-          </Col>
-        </Row>}
       </Form>
     )
   }

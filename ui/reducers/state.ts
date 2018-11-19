@@ -19,7 +19,7 @@ export interface DemoState {
 export interface RentIndexState {
   rentIndexList: RentIndexList
   rentIndex: RentIndex | null
-  result: RentResult | null
+  result: RentResult[] | null
   loading: boolean
   error: AxiosError | null
 }

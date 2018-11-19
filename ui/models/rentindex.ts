@@ -66,7 +66,7 @@ export interface QuestionCatalogRequest {
 }
 
 export interface RentResult {
-  rentIndex: {
+  rentIndex?: {
     min: number
     max: number
     avg: number

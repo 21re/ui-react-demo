@@ -1,7 +1,7 @@
 import { State } from "./reducers/state";
 import { Router, Routes } from "./helper/routing";
 import { NavigationPage, NavigationActionCreators } from "./actions/navigation";
-import { checkToken, registerToken, openXLStoreApp, getRentIndexList } from "./actions/demo";
+import { checkToken, registerToken, openXLStoreApp } from "./actions/demo";
 import { Promise } from "es6-promise";
 import * as cookie from "cookie";
 
@@ -60,7 +60,6 @@ const routes: Routes<State> = {
   "/demo/rentindex": {
     name: NavigationPage.RentIndex,
     action: (dispatch) => {
-      getRentIndexList(dispatch)();
       dispatch(NavigationActionCreators.navigateTo.create({ name: NavigationPage.RentIndex, params: {} }))
       return Promise.resolve(undefined)
     },

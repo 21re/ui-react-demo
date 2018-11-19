@@ -33,7 +33,7 @@ export const DemoActionCreators = {
   getRentIndexError: new ActionCreator<'GET_RENTINDEX_ERROR', AxiosError>('GET_RENTINDEX_ERROR'),
 
   getRentCalculateStart: new ActionCreator<'GET_RENTCALCULATE_START', undefined>('GET_RENTCALCULATE_START'),
-  getRentCalculateDone: new ActionCreator<'GET_RENTCALCULATE_DONE', RentResult>('GET_RENTCALCULATE_DONE'),
+  getRentCalculateDone: new ActionCreator<'GET_RENTCALCULATE_DONE', RentResult[]>('GET_RENTCALCULATE_DONE'),
   getRentCalculateError: new ActionCreator<'GET_RENTCALCULATE_ERROR', AxiosError>('GET_RENTCALCULATE_ERROR'),
 };
 
