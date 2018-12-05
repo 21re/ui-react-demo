@@ -243,7 +243,7 @@ class XLStoreAppDetailsViewImpl extends React.Component<Props, AppDetailsState> 
               <FormGroup check>
                 <Label check>
                   <div style={{ marginTop: "-1.3rem" }}>
-                    <Input type="checkbox" {...(fieldValue === "TRUE" ? { checked: true } : { checked: false })} onChange={ev => this.updateInputFieldState(field.name, ev.target.checked ? "TRUE" : "FALSE")} />
+                    <Input type="checkbox" checked={fieldValue === "TRUE"} onChange={ev => this.updateInputFieldState(field.name, ev.target.checked ? "TRUE" : "FALSE")} />
                   </div>
                 </Label>
               </FormGroup>
